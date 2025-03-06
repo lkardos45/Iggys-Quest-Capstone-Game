@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuuj7efexppl6"]
+
+[ext_resource type="Script" path="res://Scenes/end_screen.gd" id="1_11oya"]
+[ext_resource type="FontFile" uid="uid://668msyhf6ktd" path="res://Fonts/Early GameBoy.ttf" id="5_stiyn"]
+
+[node name="EndScreen" type="Node2D"]
+script = ExtResource("1_11oya")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -88.0
+offset_top = -64.0
+offset_right = -48.0
+offset_bottom = -24.0
+scale = Vector2(26.155, 21.9581)
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 72.0
+offset_top = 48.0
+offset_right = 752.0
+offset_bottom = 151.0
+theme_override_fonts/font = ExtResource("5_stiyn")
+theme_override_font_sizes/font_size = 30
+text = "Congratulations, Iggy! You recovered all the orbs!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="."]
+visible = false
+offset_left = 72.0
+offset_top = 48.0
+offset_right = 752.0
+offset_bottom = 151.0
+theme_override_fonts/font = ExtResource("5_stiyn")
+theme_override_font_sizes/font_size = 40
+text = "Congratulations, you won!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 256.0
+offset_top = 248.0
+offset_right = 560.0
+offset_bottom = 510.0
+theme_override_fonts/font = ExtResource("5_stiyn")
+theme_override_font_sizes/font_size = 40
+text = "Score: 
+0
+
+Coins: 
+0"
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 72.0
+offset_top = 608.0
+offset_right = 752.0
+offset_bottom = 711.0
+theme_override_fonts/font = ExtResource("5_stiyn")
+theme_override_font_sizes/font_size = 30
+text = "Press Start to return to the Title Screen"
+horizontal_alignment = 1
+autowrap_mode = 2

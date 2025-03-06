@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://do3wcqcx17ts8"
+path="res://.godot/imported/Underground Music 1.mp3-a5e5d056326830d1a601065406de67a9.mp3str"
+
+[deps]
+
+source_file="res://Music/Underground Music 1.mp3"
+dest_files=["res://.godot/imported/Underground Music 1.mp3-a5e5d056326830d1a601065406de67a9.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

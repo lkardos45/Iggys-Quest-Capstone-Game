@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsngmw547kofp"]
+
+[ext_resource type="Texture2D" uid="uid://cnfl5dnobqf2v" path="res://Sprites/Title Screen/Title_Cloud.png" id="1_akmrw"]
+[ext_resource type="Script" path="res://Scenes/title_screen.gd" id="1_qupge"]
+[ext_resource type="Texture2D" uid="uid://dwovfe4n8lvuu" path="res://Sprites/Title Screen/Title_Text.png" id="3_i1n85"]
+[ext_resource type="Texture2D" uid="uid://cqbix6pnkog2u" path="res://Sprites/Title Screen/Title_Sign_Improved.png" id="3_xyppw"]
+[ext_resource type="FontFile" uid="uid://668msyhf6ktd" path="res://Fonts/Early GameBoy.ttf" id="5_iu1ed"]
+
+[node name="TitleScreen" type="Node2D"]
+script = ExtResource("1_qupge")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -88.0
+offset_top = -64.0
+offset_right = -48.0
+offset_bottom = -24.0
+scale = Vector2(26.155, 21.9581)
+color = Color(0.388235, 0.67451, 0.921569, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -88.0
+offset_top = -64.0
+offset_right = -48.0
+offset_bottom = -43.0
+scale = Vector2(26.155, 21.9581)
+color = Color(0.513726, 0.745098, 0.952941, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = -88.0
+offset_top = -64.0
+offset_right = -48.0
+offset_bottom = -51.0
+scale = Vector2(26.155, 21.9581)
+color = Color(0.592157, 0.788235, 0.964706, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+offset_left = -88.0
+offset_top = -64.0
+offset_right = -48.0
+offset_bottom = -59.0
+scale = Vector2(26.155, 21.9581)
+color = Color(0.764706, 0.878431, 0.980392, 1)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(64, 120)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_akmrw")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(712, 592)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_akmrw")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(680, 144)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_akmrw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(408, 400)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("3_xyppw")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(424, 352)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("3_i1n85")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 160.0
+offset_top = 624.0
+offset_right = 688.0
+offset_bottom = 670.0
+theme_override_fonts/font = ExtResource("5_iu1ed")
+theme_override_font_sizes/font_size = 32
+text = "Press Start"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 672.0
+offset_right = 776.0
+offset_bottom = 718.0
+theme_override_colors/font_color = Color(0.6, 0.898039, 0.313726, 1)
+theme_override_fonts/font = ExtResource("5_iu1ed")
+theme_override_font_sizes/font_size = 32
+text = "Developed by Logan Kardos"
+horizontal_alignment = 1

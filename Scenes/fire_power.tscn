@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://djn8qdyj28brq"]
+
+[ext_resource type="Script" path="res://Scenes/fire_power.gd" id="1_snc1d"]
+[ext_resource type="Texture2D" uid="uid://dqfjteokm7nhj" path="res://Sprites/Power-Ups/Fire_Seed.png" id="2_pstn2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vskgp"]
+atlas = ExtResource("2_pstn2")
+region = Rect2(1, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abraq"]
+atlas = ExtResource("2_pstn2")
+region = Rect2(11, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4whw6"]
+atlas = ExtResource("2_pstn2")
+region = Rect2(21, 0, 10, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ce31"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vskgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abraq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4whw6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfpvw"]
+size = Vector2(8, 8)
+
+[node name="fire_power" type="Area2D"]
+scale = Vector2(5, 5)
+collision_layer = 32
+script = ExtResource("1_snc1d")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7ce31")
+autoplay = "default"
+frame_progress = 0.00373525
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gfpvw")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -1.6)
+scale = Vector2(8.96, 1)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://ctkd5sb66ys2s"]
+
+[ext_resource type="Script" path="res://Scenes/enemy_spikey.gd" id="1_q7xca"]
+[ext_resource type="Texture2D" uid="uid://cekofkegumd6f" path="res://Sprites/Enemies/Spikey.png" id="2_ykux5"]
+[ext_resource type="AudioStream" uid="uid://cvla3uuugvug3" path="res://Sounds/enemy_death.wav" id="3_xnrfk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qxyg"]
+atlas = ExtResource("2_ykux5")
+region = Rect2(19, 0, 19, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcl18"]
+atlas = ExtResource("2_ykux5")
+region = Rect2(1, 0, 19, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0hsyc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qxyg")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tcl18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qxyg")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_054mj"]
+size = Vector2(16, 14.8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_socis"]
+
+[node name="Spikey" type="Area2D"]
+scale = Vector2(4, 4)
+collision_layer = 4
+collision_mask = 9
+script = ExtResource("1_q7xca")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0hsyc")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.994724
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.72204e-07, 0.6)
+shape = SubResource("RectangleShape2D_054mj")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+position = Vector2(0, 6)
+scale = Vector2(0.2, 0.2)
+shape = SubResource("RectangleShape2D_socis")
+target_position = Vector2(0, 0)
+collision_mask = 18
+collide_with_areas = true
+
+[node name="RayCast2D_Left" type="RayCast2D" parent="."]
+position = Vector2(0, 6)
+target_position = Vector2(-8, 4.76837e-07)
+collision_mask = 18
+
+[node name="RayCast2D_Right" type="RayCast2D" parent="."]
+position = Vector2(0, 6)
+target_position = Vector2(8, 4.76837e-07)
+collision_mask = 18
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-2.38419e-07, 5.96046e-07)
+scale = Vector2(5.3, 1.26)
+
+[node name="sfx_enemy_death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xnrfk")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

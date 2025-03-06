@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxftmytn6tld6"]
+
+[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_w2vmq"]
+[ext_resource type="AudioStream" uid="uid://c5x3uk7lhi5mu" path="res://Sounds/coin_collect.wav" id="2_0ug3v"]
+
+[node name="GameManager" type="Node" groups=["game_manager"]]
+script = ExtResource("1_w2vmq")
+
+[node name="sfx_coin_collect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0ug3v")

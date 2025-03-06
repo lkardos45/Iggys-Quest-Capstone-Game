@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://lpv2kjitu5ft"]
+
+[ext_resource type="Script" path="res://Scenes/spring.gd" id="1_1ogd4"]
+[ext_resource type="Texture2D" uid="uid://c0cmk1gnjka01" path="res://Sprites/Blocks/spring.png" id="2_f1enx"]
+[ext_resource type="AudioStream" uid="uid://ck2lkrxd3r638" path="res://Sounds/spring_high_jump.wav" id="3_75dkh"]
+[ext_resource type="AudioStream" uid="uid://brko3srobtgyq" path="res://Sounds/spring_low_jump.wav" id="4_vqsdq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yso5f"]
+atlas = ExtResource("2_f1enx")
+region = Rect2(19, 0, 18, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cif3a"]
+atlas = ExtResource("2_f1enx")
+region = Rect2(37, 0, 18, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rccmj"]
+atlas = ExtResource("2_f1enx")
+region = Rect2(1, 0, 18, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wdy5w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yso5f")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cif3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yso5f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rccmj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yso5f")
+}],
+"loop": false,
+"name": &"spring",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vxsp1"]
+size = Vector2(16, 16)
+
+[node name="Spring" type="Node2D"]
+scale = Vector2(5, 5)
+script = ExtResource("1_1ogd4")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wdy5w")
+animation = &"spring"
+autoplay = "idle"
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-5.72204e-07, 4)
+shape = SubResource("RectangleShape2D_vxsp1")
+
+[node name="sfx_spring_high" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_75dkh")
+
+[node name="sfx_spring_low" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_vqsdq")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

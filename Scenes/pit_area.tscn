@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnrqi3og4ntt1"]
+
+[ext_resource type="Script" path="res://Scenes/pit_area.gd" id="1_odex5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_omwli"]
+size = Vector2(266, 74)
+
+[node name="PitArea" type="Area2D"]
+collision_layer = 128
+script = ExtResource("1_odex5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(123, 27)
+shape = SubResource("RectangleShape2D_omwli")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

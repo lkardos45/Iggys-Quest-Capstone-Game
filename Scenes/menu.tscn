@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0pnwl5c4jrt1"]
+
+[ext_resource type="FontFile" uid="uid://668msyhf6ktd" path="res://Fonts/Early GameBoy.ttf" id="1_o25vq"]
+[ext_resource type="Script" path="res://Scenes/menu.gd" id="2_57iw2"]
+[ext_resource type="Script" path="res://Scenes/button.gd" id="3_ta372"]
+
+[sub_resource type="Theme" id="Theme_llp6f"]
+default_font = ExtResource("1_o25vq")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4plwm"]
+bg_color = Color(0, 0.764706, 0.152941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hq1xi"]
+bg_color = Color(0, 0.764706, 0.152941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6o8dx"]
+bg_color = Color(0, 0.764706, 0.152941, 1)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.478
+anchor_right = 0.5
+anchor_bottom = 0.478
+offset_left = -288.0
+offset_top = -232.16
+offset_right = 272.0
+offset_bottom = 231.84
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_llp6f")
+script = ExtResource("2_57iw2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -128.0
+offset_top = -136.0
+offset_right = 728.0
+offset_bottom = 632.0
+color = Color(0, 0.321569, 0.0901961, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.493
+anchor_top = 0.483
+anchor_right = 0.493
+anchor_bottom = 0.483
+offset_left = -172.08
+offset_top = -120.112
+offset_right = -52.08
+offset_bottom = -28.112
+scale = Vector2(3, 3)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Start" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_4plwm")
+text = "Start"
+flat = true
+script = ExtResource("3_ta372")
+
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_hq1xi")
+text = "Options"
+flat = true
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_6o8dx")
+text = "Quit"
+flat = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

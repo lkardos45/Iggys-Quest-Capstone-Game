@@ -1,0 +1,115 @@
+[gd_scene load_steps=13 format=3 uid="uid://bcxxmvgmnc87a"]
+
+[ext_resource type="Script" path="res://Scenes/enemy_owl.gd" id="1_rtu60"]
+[ext_resource type="Texture2D" uid="uid://bt1je0lncoosx" path="res://Sprites/Enemies/Owl_Enemy.png" id="2_fvq0g"]
+[ext_resource type="AudioStream" uid="uid://cvla3uuugvug3" path="res://Sounds/enemy_death.wav" id="3_o6esi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0d87"]
+atlas = ExtResource("2_fvq0g")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_guhxe"]
+atlas = ExtResource("2_fvq0g")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gsqv"]
+atlas = ExtResource("2_fvq0g")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0onvo"]
+atlas = ExtResource("2_fvq0g")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cusn5"]
+atlas = ExtResource("2_fvq0g")
+region = Rect2(128, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6qse"]
+atlas = ExtResource("2_fvq0g")
+region = Rect2(160, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0hsyc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0d87")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_guhxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gsqv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0onvo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gsqv")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cusn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6qse")
+}],
+"loop": true,
+"name": &"rolly_death",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_054mj"]
+size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_socis"]
+
+[node name="Owl" type="Area2D"]
+scale = Vector2(5, 5)
+collision_layer = 4
+collision_mask = 9
+script = ExtResource("1_rtu60")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0hsyc")
+animation = &"flying"
+autoplay = "flying"
+frame_progress = 0.528073
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.38419e-07, 1)
+shape = SubResource("RectangleShape2D_054mj")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+position = Vector2(0, 2)
+scale = Vector2(0.2, 0.2)
+shape = SubResource("RectangleShape2D_socis")
+target_position = Vector2(0, 0)
+collision_mask = 18
+collide_with_areas = true
+
+[node name="RayCast2D_Left" type="RayCast2D" parent="."]
+target_position = Vector2(-4, 0)
+collision_mask = 18
+
+[node name="RayCast2D_Right" type="RayCast2D" parent="."]
+target_position = Vector2(4, 0)
+collision_mask = 18
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-2.38419e-07, 5.96046e-07)
+scale = Vector2(5.3, 1.26)
+
+[node name="sfx_enemy_death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_o6esi")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

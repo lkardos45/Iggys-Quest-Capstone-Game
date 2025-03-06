@@ -1,0 +1,92 @@
+[gd_scene load_steps=10 format=3 uid="uid://di58asjpg0wgu"]
+
+[ext_resource type="Script" path="res://Scenes/berry.gd" id="1_wt60g"]
+[ext_resource type="Texture2D" uid="uid://buhtsfmr3fp70" path="res://Sprites/Power-Ups/Berry.png" id="2_qt17w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_254wk"]
+atlas = ExtResource("2_qt17w")
+region = Rect2(1, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odue7"]
+atlas = ExtResource("2_qt17w")
+region = Rect2(11, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sr70t"]
+atlas = ExtResource("2_qt17w")
+region = Rect2(21, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cmgg"]
+atlas = ExtResource("2_qt17w")
+region = Rect2(31, 0, 10, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k0ewr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_254wk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_254wk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odue7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sr70t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cmgg")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmili"]
+size = Vector2(6, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7dio"]
+
+[node name="Berry" type="Area2D"]
+scale = Vector2(5, 5)
+collision_layer = 32
+script = ExtResource("1_wt60g")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_k0ewr")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.096425
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.43051e-07, -1.43051e-07)
+shape = SubResource("RectangleShape2D_pmili")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(0.3, 0.2)
+shape = SubResource("RectangleShape2D_j7dio")
+target_position = Vector2(0, 0)
+collision_mask = 18
+collide_with_areas = true
+
+[node name="RayCast2D_Left" type="RayCast2D" parent="."]
+target_position = Vector2(-4, 0)
+collision_mask = 18
+collide_with_areas = true
+
+[node name="RayCast2D_Right" type="RayCast2D" parent="."]
+target_position = Vector2(4, 0)
+collision_mask = 18
+collide_with_areas = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -1.6)
+scale = Vector2(8.96, 1)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

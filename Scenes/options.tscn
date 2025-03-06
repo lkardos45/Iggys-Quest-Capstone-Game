@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpo8pbkk4awbd"]
+
+[ext_resource type="FontFile" uid="uid://668msyhf6ktd" path="res://Fonts/Early GameBoy.ttf" id="1_c5j34"]
+[ext_resource type="Script" path="res://Scenes/options.gd" id="2_q2j0w"]
+[ext_resource type="Script" path="res://Scenes/button.gd" id="3_wcdhh"]
+
+[sub_resource type="Theme" id="Theme_llp6f"]
+default_font = ExtResource("1_c5j34")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ilnf6"]
+bg_color = Color(0, 0.764706, 0.152941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1t6ha"]
+bg_color = Color(0, 0.764706, 0.152941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fset"]
+bg_color = Color(0, 0.764706, 0.152941, 1)
+
+[node name="Options" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -248.0
+offset_top = -104.0
+offset_right = 263.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_llp6f")
+script = ExtResource("2_q2j0w")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -280.0
+offset_right = 672.0
+offset_bottom = 488.0
+color = Color(0, 0.321569, 0.0901961, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(3, 3)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Fullscreen" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_ilnf6")
+text = "Fullscreen"
+flat = true
+
+[node name="Controls" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_1t6ha")
+text = "Controls"
+flat = true
+
+[node name="Back" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_4fset")
+text = "Back"
+flat = true
+script = ExtResource("3_wcdhh")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

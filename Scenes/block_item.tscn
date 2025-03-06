@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://brkonoclihtet"]
+
+[ext_resource type="Script" path="res://Scenes/block_item.gd" id="1_ajxqx"]
+[ext_resource type="Texture2D" uid="uid://daf64msy7l66e" path="res://Sprites/Blocks/item_block.png" id="2_jw33e"]
+[ext_resource type="AudioStream" uid="uid://fk2vj4hg40ye" path="res://Sounds/block_item.wav" id="3_pbyta"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vo5kl"]
+atlas = ExtResource("2_jw33e")
+region = Rect2(20, 5, 16, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x5ss5"]
+atlas = ExtResource("2_jw33e")
+region = Rect2(4, 5, 16, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d0m2v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vo5kl")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x5ss5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ooiwq"]
+size = Vector2(8, 8)
+
+[node name="BlockItem" type="StaticBody2D"]
+z_index = 1
+scale = Vector2(6, 6)
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_ajxqx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d0m2v")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ooiwq")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, -4)
+collision_mask = 5
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="sfx_block_item" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_pbyta")

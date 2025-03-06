@@ -1,0 +1,115 @@
+[gd_scene load_steps=14 format=3 uid="uid://bacqsfgebcfj"]
+
+[ext_resource type="Script" path="res://Scenes/enemy_rolly.gd" id="1_fqrft"]
+[ext_resource type="Texture2D" uid="uid://dyde3qu3sc54g" path="res://Sprites/Enemies/Rolly_Ball.png" id="2_l4pc0"]
+[ext_resource type="Texture2D" uid="uid://cdqffyv3do8yd" path="res://Sprites/Enemies/Rolly.png" id="3_v3c35"]
+[ext_resource type="Shape2D" uid="uid://yyhaqu854hw8" path="res://Collisions/enemy_rolly_collision.tres" id="4_dkiiy"]
+[ext_resource type="AudioStream" uid="uid://cvla3uuugvug3" path="res://Sounds/enemy_death.wav" id="5_wy5oq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8v0hb"]
+atlas = ExtResource("2_l4pc0")
+region = Rect2(1, 1, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5to8c"]
+atlas = ExtResource("2_l4pc0")
+region = Rect2(11, 1, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7tth"]
+atlas = ExtResource("2_l4pc0")
+region = Rect2(21, 1, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4uc7h"]
+atlas = ExtResource("2_l4pc0")
+region = Rect2(31, 1, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_um1ss"]
+atlas = ExtResource("3_v3c35")
+region = Rect2(1, 0, 18, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6ns7"]
+atlas = ExtResource("3_v3c35")
+region = Rect2(19, 0, 18, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0hsyc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8v0hb")
+}],
+"loop": true,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8v0hb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5to8c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7tth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4uc7h")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_um1ss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6ns7")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_52wdb"]
+
+[node name="Rolly" type="Area2D"]
+collision_layer = 4
+collision_mask = 9
+script = ExtResource("1_fqrft")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_0hsyc")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.38419e-07, 4.76837e-07)
+scale = Vector2(5, 5)
+shape = ExtResource("4_dkiiy")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+position = Vector2(0, 5)
+scale = Vector2(1, 1.5)
+shape = SubResource("RectangleShape2D_52wdb")
+target_position = Vector2(0, 0)
+collision_mask = 18
+collide_with_areas = true
+
+[node name="RayCast2D_Left" type="RayCast2D" parent="."]
+target_position = Vector2(-30, 0)
+collision_mask = 18
+
+[node name="RayCast2D_Right" type="RayCast2D" parent="."]
+target_position = Vector2(30, 0)
+collision_mask = 18
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(0.5, 9.49999)
+scale = Vector2(27.25, 8.75)
+
+[node name="sfx_enemy_death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_wy5oq")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
